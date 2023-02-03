@@ -15,7 +15,7 @@ class MultiCameraCapture:
             self.captures[camera_name] = cap 
 
     @staticmethod
-    def read_frame(capture):
+    async def read_frame(capture):
         capture.grab()
         ret, frame = capture.retrieve()
         if not ret:
