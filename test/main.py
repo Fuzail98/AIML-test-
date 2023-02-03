@@ -14,7 +14,7 @@ async def main(captured_obj):
             frame = await addTimeStamp(frame)
             frame = runFaceDetection(frame)
             
-            await captured_obj.showFrame(cameraName, frame)
+            await captured_obj.showFrame(camera_name, frame)
             # cv.imshow(camera_name, frame)
 
         if cv.waitKey(1) & 0xFF == ord('q'):

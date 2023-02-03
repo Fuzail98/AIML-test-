@@ -28,6 +28,6 @@ class MultiCameraCapture:
         cv2.imshow(windowName, frame)
 
     async def asyncCameraGen(self):
-        for camerName, capture in self.captures.items():
-            yield cameraName, capture
+        for camera_name, capture in self.captures.items():
+            yield camera_name, capture
             await asyncio.sleep(0.001)
