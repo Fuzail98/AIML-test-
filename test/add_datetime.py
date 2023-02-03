@@ -1,7 +1,8 @@
 import cv2 as cv 
 import datetime
+import asyncio
 
-def addTimeStamp(frame):
+async def addTimeStamp(frame):
     # Adding timestamp on the live stream
     font = cv.FONT_HERSHEY_COMPLEX
     dt = str(datetime.datetime.now())

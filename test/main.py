@@ -4,25 +4,28 @@ from video_async import MultiCameraCapture
 import json
 from add_datetime import addTimeStamp
 from faceDetection import runFaceDetection
+import asyncio
 
 
-if __name__ == "__main__":
-    cameras = json.loads(open('cameras.json').read())
-    captured = MultiCameraCapture(sources=cameras)
-    # cap = cv.VideoCapture(0)
-    # assert cap.isOpened()
-    # print(cap)
+async def main(captured_obj):
     while True:
-        for camera_name, cap in captured.captures.items():
-            frame = captured.read_frame(cap)
-
-            frame = addTimeStamp(frame)
+        async for camera_name, cap in captured.asyncCameraGen():
+            frame = await captured.read_frame(cap)
+            frame = await addTimeStamp(frame)
             frame = runFaceDetection(frame)
             
-            cv.imshow(camera_name, frame)
+            await captured_obj.showFrame(cameraName, frame)
+            # cv.imshow(camera_name, frame)
 
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
     cv.destroyAllWindows()
+
+
+if __name__ == "__main__":
+    cameras = json.loads(open('cameras.json').read())
+    captured = MultiCameraCapture(sources=cameras)
+
+    asyncio.run(main(captured_obj=captured))

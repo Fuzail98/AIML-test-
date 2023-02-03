@@ -1,5 +1,6 @@
 import cv2
-
+import asyncio
+import numpy as np
 
 class MultiCameraCapture:
     def __init__(self, sources: dict) -> None:
@@ -21,3 +22,12 @@ class MultiCameraCapture:
             print('Empty Frame')
             return
         return frame
+
+    @staticmethod
+    async def showFrame(windowName: str, frame: np.array):
+        cv2.imshow(windowName, frame)
+
+    async def asyncCameraGen(self):
+        for camerName, capture in self.captures.items():
+            yield cameraName, capture
+            await asyncio.sleep(0.001)
