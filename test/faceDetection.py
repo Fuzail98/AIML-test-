@@ -3,7 +3,7 @@ import os
 import time
 
 
-def runFaceDetection(frame):
+async def runFaceDetection(frame):
     haar_cascades_path = os.path.dirname(cv.__file__) + "/data/haarcascade_frontalface_default.xml"
     eye_cascade_path = os.path.dirname(cv.__file__) + "/data/haarcascade_eye.xml"
     smile_cascade_path = os.path.dirname(cv.__file__) + "/data/haarcascade_smile.xml"
