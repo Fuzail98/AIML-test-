@@ -1,20 +1,27 @@
 import cv2
 import mediapipe as mp
-import csv
 import threading
+import json
+import time
 
 
 mp_face_detection = mp.solutions.face_detection
 mp_drawing = mp.solutions.drawing_utils
 
-def testFaceDetection2(camera):
+def testFaceDetection2(cameraName, cameraDetails):
     cap = cv2.VideoCapture()
-    print(f"Connecting to camera: {camera['Name']}")
-    cap.open(f"rtsp://{camera['username']}:{camera['password']}@{camera['ipAddr']}:{camera['port']}")
+    print(f"Connecting to camera: {cameraName}")
+    cap.open(cameraDetails)
 
+    previousTime = 0
     with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
         while cap.isOpened():
             success, image = cap.read()
+            currentTime = time.time()
+            fps = 1/(currentTime - previousTime)
+            previousTime = currentTime
+            cv2.putText(image, f'fps = {int(fps)}', (20, 70), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 2)
+            print(f'fps = {int(fps)}: cam')
             if not success:
                 print("Ignoring empty camera frame.")
           # If loading a video, use 'break' instead of 'continue'.
@@ -32,34 +39,16 @@ def testFaceDetection2(camera):
                 for detection in results.detections:
                     mp_drawing.draw_detection(image, detection)
             
-            cv2.imshow(camera['Name'], image)
+            cv2.imshow(cameraName, image)
             if cv2.waitKey(5) & 0xFF == ord('q'):
                 break
         cap.release()
 
-
-
-
-with open('cameraList.csv', 'r') as f:
-    cameraList = csv.reader(f, delimiter=':', lineterminator='\n')
-    cameraDict = {}
-    for cameras in cameraList:
-        camera = {
-            'ipAddr': cameras[1], 
-            'port': cameras[2],
-            'Name': cameras[3], 
-            'username': cameras[4], 
-            'password': cameras[5]
-        }
-        tmp = {}
-        for serialNumber in [cameras[0]]:
-            tmp["camera_%s" % serialNumber] = camera
-            cameraDict.update(tmp)
-
-
 threads = list()
-for cameraNumber, cameraDetails in cameraDict.items():
-    th = threading.Thread(target=testFaceDetection2, args=(cameraDetails,))
+cameras = json.loads(open('cameras.json').read())
+
+for cameraName, cameraDetails in cameras.items():
+    th = threading.Thread(target=testFaceDetection2, args=(cameraName, cameraDetails))
     threads.append(th)
 
 for th in threads:
