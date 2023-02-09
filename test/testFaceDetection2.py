@@ -21,7 +21,7 @@ def testFaceDetection2(cameraName, cameraDetails):
             fps = 1/(currentTime - previousTime)
             previousTime = currentTime
             cv2.putText(image, f'fps = {int(fps)}', (20, 70), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 2)
-            print(f'fps = {int(fps)}: cam')
+            print(f'fps for  {cameraName} = {int(fps)}')
             if not success:
                 print("Ignoring empty camera frame.")
           # If loading a video, use 'break' instead of 'continue'.
