@@ -5,42 +5,6 @@ import threading
 import mediapipe as mp 
 import time
 
-# faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-
-# cap = cv2.VideoCapture()
-# cap.open(0)
-
-# while True:
-#     ret, frame = cap.read()
-#     if not ret:
-#         print("Ignoring empty frame")
-#         continue
-#     result = DeepFace.analyze(frame, actions=['emotion'])
-#     print(result[0])
-
-#     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  
-#     faces = faceCascade.detectMultiScale(gray, 1.1, 4)
-
-#     for (x, y, w, h) in faces:
-#         cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
-
-#     font = cv2.FONT_HERSHEY_SIMPLEX
-
-    # cv2.putText(
-    #     frame,
-    #     result[0]['dominant_emotion'],
-    #     (50, 50),
-    #     font, 3,
-    #     (0, 0, 255), 2
-    # )
-
-#     cv2.imshow("Frontal camera", frame)
-
-#     if cv2.waitKey(1) & 0xFF == ord('q'):
-#         break
-
-# cap.release()
-# cv2.destroyAllWindows()
 
 mp_face_detection = mp.solutions.face_detection
 mp_drawing = mp.solutions.drawing_utils
