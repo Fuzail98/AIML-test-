@@ -31,13 +31,14 @@ def modelDetect(cameraName, cameraDetails):
             if not success:
                 print("Ignoring empty camera frame.")
                 continue
-
-            result = DeepFace.analyze(image, actions=['emotion', 'gender', 'age'])
-            result[0]['age'] = str(result[0]['age'])
+            
+            emotion = DeepFace.analyze(image, actions=['emotion'])
+            gender = DeepFace.analyze(image, actions=['gender'])
+            age = DeepFace.analyze(image, actions=['age'])
 
             fps = fpsCounter()
 
-            putTextOnStream(image, fps, result)
+            putTextOnStream(image, fps, emotion, gender, age)
             # print(f'fps for  {cameraName} = {int(fps)}')
             
             image = faceDetection(image, mp_drawing, face_detection)
