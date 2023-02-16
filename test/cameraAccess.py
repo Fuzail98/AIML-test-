@@ -4,6 +4,7 @@ import cv2
 cap = cv2.VideoCapture()
 cap.open("rtsp://admin:Shazabadmin123@172.16.1.6:554")
 
+
 while(True):
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

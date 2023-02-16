@@ -1,21 +1,11 @@
 import cv2
-from deepface import DeepFace
 import json
 import threading
 import mediapipe as mp 
 import time
-
-from putTextOnStream import putTextOnStream
 from mediapipeFaceDetecion import faceDetection
+from models import ageDetection, emotionDetection, genderDetection, fpsCounter
 
-
-def fpsCounter():
-    previousTime = 0
-    currentTime = time.time()
-    fps = 1/(currentTime - previousTime)
-    previousTime = currentTime
-
-    return fps
 
 mp_face_detection = mp.solutions.face_detection
 mp_drawing = mp.solutions.drawing_utils
@@ -25,6 +15,7 @@ def modelDetect(cameraName, cameraDetails):
     print(f"Connecting to camera: {cameraName}")
     cap.open(cameraDetails)
 
+    previousTime = 0
     with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
         while cap.isOpened():
             success, image = cap.read()
@@ -32,14 +23,15 @@ def modelDetect(cameraName, cameraDetails):
                 print("Ignoring empty camera frame.")
                 continue
             
-            emotion = DeepFace.analyze(image, actions=['emotion'])
-            gender = DeepFace.analyze(image, actions=['gender'])
-            age = DeepFace.analyze(image, actions=['age'])
+            currentTime = time.time()
+            fps = 1/(currentTime - previousTime)
+            previousTime = currentTime
+            fpsCounter(image, fps)
+            print(f'fps for  {cameraName} = {int(fps)}')
 
-            fps = fpsCounter()
-
-            putTextOnStream(image, fps, emotion, gender, age)
-            # print(f'fps for  {cameraName} = {int(fps)}')
+            emotionDetection(image)
+            ageDetection(image)
+            genderDetection(image)
             
             image = faceDetection(image, mp_drawing, face_detection)
             

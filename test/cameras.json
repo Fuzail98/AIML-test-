@@ -1,4 +1,4 @@
 {
-    "Office Room 2": "rtsp://admin:Shazabadmin123@172.16.1.6:554",
-    "Frontal camera": 0
+    "Frontal camera": 0, 
+    "Office Camera1": "rtsp://admin:Shazabadmin123@172.16.1.6:554"
 }
