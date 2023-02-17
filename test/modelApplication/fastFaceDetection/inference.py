@@ -1,18 +1,10 @@
-#! /usr/bin/env python
-
-# """
-# Run face expression detection locally on your system in several modes:
-# 1. On a library of images.
-# 2. On a video stream from your webcam, in real time.
-# 3. On a saved video file (currently unimplemented).
-# """
-
 import argparse
 import os
 import json
 import torch
+import threading
 from torch.hub import download_url_to_file
-from frontend2 import *
+from multiCameraFrontend import *
 
 argparser = argparse.ArgumentParser(
 	"Run face expression inference on files, saved video or camera feed")
@@ -66,7 +58,19 @@ def main(argv):
 		files_inference(args.weights, config["inference"]["files"]["data_folder"],
 							config["inference"]["emotionnet"]["class_labels"], device)
 	elif args.mode == 2:
-		camfeed_inference(args.weights, config["inference"]["emotionnet"]["class_labels"], device)
+		cameras = json.loads(open('../../cameras.json').read())
+
+		threads = list()
+		for cameraName, cameraDetails in cameras.items():
+			th = threading.Thread(target=camfeed_inference, args=(args.weights, config["inference"]["emotionnet"]["class_labels"], cameraName, cameraDetails, device))
+			threads.append(th)
+
+		for th in threads:
+			th.start()
+
+		for th in threads:
+			th.join()
+
 	elif args.mode == 3:
 		print("Not implemented yet. Please wait for version update.")
 	else:
