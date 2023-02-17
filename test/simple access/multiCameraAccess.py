@@ -40,13 +40,13 @@ def multiCameraAccess(camera):
         # task2 = asyncio.create_task(runFaceDetection(frame))
         # await asyncio.gather(task2)
         # await asyncio.sleep(0.01)
-        frame = runFaceDetection(frame)
+        # frame = runFaceDetection(frame)
         cv.imshow(camera['ipAddr'], frame)
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
         print('####################')
 
-with open('cameraList.csv', 'r') as f:
+with open('../cameraList.csv', 'r') as f:
     cameraList = csv.reader(f, delimiter=':', lineterminator='\n')
     cameraDict = {}
     for cameras in cameraList:

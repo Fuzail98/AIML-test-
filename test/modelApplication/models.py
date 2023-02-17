@@ -1,6 +1,5 @@
 from deepface import DeepFace
 import cv2
-import time
 
 font = cv2.FONT_HERSHEY_COMPLEX
 

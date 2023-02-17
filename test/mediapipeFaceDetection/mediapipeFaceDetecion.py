@@ -1,4 +1,3 @@
-import mediapipe
 import cv2
 
 def faceDetection(image, mp_drawing, face_detection):

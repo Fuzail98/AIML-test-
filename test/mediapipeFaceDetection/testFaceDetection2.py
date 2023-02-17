@@ -45,7 +45,7 @@ def testFaceDetection2(cameraName, cameraDetails):
         cap.release()
 
 threads = list()
-cameras = json.loads(open('cameras.json').read())
+cameras = json.loads(open('../cameras.json').read())
 
 for cameraName, cameraDetails in cameras.items():
     th = threading.Thread(target=testFaceDetection2, args=(cameraName, cameraDetails))
