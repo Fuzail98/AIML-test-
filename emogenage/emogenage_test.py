@@ -34,19 +34,22 @@ model_age = load_model('./Age-Gender-Prediction/model/model_age.hdf5')
 
 # open webcam
 webcam = cv2.VideoCapture(0)
-
+# length = int(webcam.get(cv2.CAP_PROP_FRAME_COUNT))
+# print(f'No. of people: {length}')
 if not webcam.isOpened():
     print("Could not open webcam")
     exit()
 
-classes = ['man','woman']
+classes = ['Male','Female']
 
 # loop through frames
 while webcam.isOpened():
 
     # read frame from webcam
     status, frame = webcam.read()
-
+    # length = int(webcam.get(cv2.CAP_PROP_FRAME_COUNT))
+    # Frames = cap.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT)
+    # print( length )
     if not status:
         print("Could not read frame")
         exit()
@@ -57,12 +60,14 @@ while webcam.isOpened():
     print(face)
     print(confidence)
 
+    people = 1
     # loop through detected faces
     for idx, f in enumerate(face):
 
         # get corner points of face rectangle
         (startX, startY) = f[0], f[1]
         (endX, endY) = f[2], f[3]
+        people += 1
 
         # draw rectangle over face
         cv2.rectangle(frame, (startX,startY), (endX,endY), (0,255,0), 2)
@@ -107,14 +112,15 @@ while webcam.isOpened():
         label = "{}: {:.2f}%".format(label, conf[idx] * 100)
        
         Y = startY - 10 if startY - 10 > 10 else startY + 10
-       
+        
         # write label and confidence above face rectangle
         cv2.putText(frame, label, (startX, Y),  cv2.FONT_HERSHEY_SIMPLEX,
                     0.7, (0, 255, 0), 2)
-        cv2.putText(frame, predicted_emotion, (int(startX+20), int(Y-60)), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 255, 255), 2)
-
-        cv2.putText(frame, f'Age: {age}', (startX-25, Y-25), cv2.FONT_HERSHEY_SIMPLEX, 0.6,(255, 255, 255), 2 )
-
+        cv2.putText(frame, predicted_emotion, (int(startX+20), int(Y-60)), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 0, 255), 2)
+        age = str(int(age))
+        cv2.putText(frame, f'Age: {age}', (startX-25, Y-25), cv2.FONT_HERSHEY_SIMPLEX, 0.6,(255, 255, 0), 2 )
+    
+    cv2.putText(frame, f'No. of people : {people-1}', (30,20), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255,0,0), 2)
     # display output
     cv2.imshow("gender and emotion detection", frame)
 
