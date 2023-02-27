@@ -4,8 +4,14 @@ import cv2
 import pickle
 import collections
 import os
+import time
+import sys
 
 from model import *
+
+sys.path.append('../')
+from models import fpsCounter
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -92,6 +98,7 @@ def camfeed_inference(weights, class_labels, cameraName, cameraDetails, device =
 		print(f"Connecting to {cameraName}")
 		cap.open(cameraDetails)
 		# cap = cv2.VideoCapture(1)
+		previousTime = 0
 		while True:
 			ret, frame = cap.read()
 			labels = []
@@ -122,9 +129,14 @@ def camfeed_inference(weights, class_labels, cameraName, cameraDetails, device =
 					gender = genders[genderPreds[0].argmax()]
 					agePreds = ageNet.forward()
 					age = ages[agePreds[0].argmax()]
+					currentTime = time.time()
+					fps = 1/(currentTime - previousTime)
+					previousTime = currentTime
 					print("Gender: {}, conf = {:.3f}".format(gender, genderPreds[0].max()))
+					fpsCounter(frame, fps)
 					cv2.putText(frame, f"Gender: {gender}", genderPosition, cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
 					cv2.putText(frame, f"Age: {age}", agePosition, cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
+
 				else:
 					cv2.putText(frame, 'No Face Found', (20,60), cv2.FONT_HERSHEY_SIMPLEX, 2, (0,255,0), 3)
 			cv2.imshow(cameraName, frame)
