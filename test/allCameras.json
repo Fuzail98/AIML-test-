@@ -1,9 +1,5 @@
 {
-    "camera1": "rtsp://admin:Shazabadmin123@172.16.1.2:554", 
-    "camera2": "rtsp://admin:Shazabadmin123@172.16.1.3:554",
-    "camera3": "rtsp://admin:Shazabadmin123@172.16.1.4:554",
-    "camera4": "rtsp://admin:Shazabadmin123@172.16.1.6:554", 
-    "camera5": "rtsp://admin:Shazabadmin123@172.16.1.7:554",
-    "camera6": "rtsp://admin:Shazabadmin123@172.16.1.8:554", 
-    "camera7": "rtsp://admin:Shazabadmin123@172.16.1.9:554" 
+    "camera1": "rtsp://admin:Shazabadmin123@172.16.1.6:554", 
+    "camera2": "rtsp://admin:Shazabadmin123@172.16.1.7:554",
+    "camera3": "rtsp://admin:Shazabadmin123@172.16.1.8:554"
 }

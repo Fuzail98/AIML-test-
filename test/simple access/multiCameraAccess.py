@@ -5,19 +5,19 @@ import os
 import time
 
 
-def runFaceDetection(frame):
-    haar_cascades_path = os.path.dirname(cv.__file__) + "/data/haarcascade_frontalface_default.xml"
+# def runFaceDetection(frame):
+#     haar_cascades_path = os.path.dirname(cv.__file__) + "/data/haarcascade_frontalface_default.xml"
     
-    face_cascade = cv.CascadeClassifier(haar_cascades_path)
+#     face_cascade = cv.CascadeClassifier(haar_cascades_path)
 
-    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+#     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+#     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-    for (x, y, w, h) in faces:
-        frame = cv.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+#     for (x, y, w, h) in faces:
+#         frame = cv.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
     
-    time.sleep(0.5)
-    return frame
+#     time.sleep(0.5)
+#     return frame
 
 
 def read_frame(capture):
@@ -44,7 +44,7 @@ def multiCameraAccess(camera):
         cv.imshow(camera['ipAddr'], frame)
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
-        print('####################')
+        
 
 with open('../cameraList.csv', 'r') as f:
     cameraList = csv.reader(f, delimiter=':', lineterminator='\n')
