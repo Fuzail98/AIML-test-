@@ -1,3 +1,82 @@
 {
-    "Frontal camera": 0
+    "camera_1": {
+        "cameraIndex": 1,
+        "room": "Office Room 1",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.7",
+        "rtsp": true
+    },
+    "camera_2": {
+        "cameraIndex": 2,
+        "room": "Office Room 2",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.6",
+        "rtsp": true
+    },
+    "camera_3": {
+        "cameraIndex": 3,
+        "room": "Reception",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.10",
+        "rtsp": true
+    },
+    "camera_4": {
+        "cameraIndex": 4,
+        "room": "2nd Floor",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.2",
+        "rtsp": true
+    },
+    "camera_5": {
+        "cameraIndex": 5,
+        "room": "4th Floor",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.3",
+        "rtsp": true
+    },
+    "camera_6": {
+        "cameraIndex": 6,
+        "room": "Ground Floor",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.4",
+        "rtsp": true
+    },
+    "camera_7": {
+        "cameraIndex": 7,
+        "room": "Entry 1",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.5",
+        "rtsp": true
+    },
+    "camera_8": {
+        "cameraIndex": 8,
+        "room": "3rd Floor",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.9",
+        "rtsp": true
+    },
+    "camera_9": {
+        "cameraIndex": 9,
+        "room": "1st Floor",
+        "username": "admin",
+        "password": "Shazabadmin123",
+        "ipAddress": "172.16.1.12",
+        "rtsp": true
+    },
+    "camera_10": {
+        "cameraIndex": 10,
+        "room": "5th Floor",
+        "username": "admin",
+        "password": "Shazabadmi123",
+        "ipAddress": "172.16.1.13",
+        "rtsp": true
+    }
 }

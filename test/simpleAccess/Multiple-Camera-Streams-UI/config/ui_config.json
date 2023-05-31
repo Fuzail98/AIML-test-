@@ -1,0 +1,20 @@
+{
+    "camera_url": [
+        "rtsp://admin:Shazabadmin123@172.16.1.2:554",
+        "rtsp://admin:Shazabadmin123@172.16.1.3:554",
+        "rtsp://admin:Shazabadmin123@172.16.1.4:554",
+        "rtsp://admin:Shazabadmin123@172.16.1.5:554",
+        "rtsp://admin:Shazabadmin123@172.16.1.6:554",
+        "rtsp://admin:Shazabadmin123@172.16.1.7:554",
+        "rtsp://admin:Shazabadmin123@172.16.1.9:554",
+        "rtsp://admin:Shazabadmin123@172.16.1.10:554",
+        "rtsp://admin:Shazabadmin123@172.16.1.12:554",
+        "rtsp://admin:Shazabadmi123@172.16.1.13:554"
+    ],
+    "db_host": "",
+    "db_user": "",
+    "db_port": "",
+    "db_password": "",
+    "db_database": "",
+    "db_table": ""
+}

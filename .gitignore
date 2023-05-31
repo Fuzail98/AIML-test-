@@ -1,1 +1,3 @@
 __pycache__
+test/data/*.*
+test/simpleAccess/Multiple-Camera-Streams-UI/mylib/__pycache__

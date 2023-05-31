@@ -1,5 +1,4 @@
 {
-    "camera1": "rtsp://admin:Shazabadmin123@172.16.1.6:554", 
-    "camera2": "rtsp://admin:Shazabadmin123@172.16.1.7:554",
-    "camera3": "rtsp://admin:Shazabadmin123@172.16.1.8:554"
+    "camera1": "rtsp://admin:Shazabadmin123@172.16.1.6:554",
+    "camera2": "rtsp://admin:Shazabadmin123@172.16.1.7:554"
 }
